@@ -21,7 +21,7 @@ describe Flickr::Contacts do
     
     it "should return public contacts for the given user" do
       bogus_user_id = "12334@N00"
-      @flickr.stub!(:request_over_http).and_return(@public_list_xml)      
+      @flickr.stub(:request_over_http).and_return(@public_list_xml)      
       contacts = @flickr.contacts.get_public_list(bogus_user_id)
       contacts.size.should == 2
       contacts.first.username.should == "kooop"
@@ -39,7 +39,7 @@ describe Flickr::Contacts do
     
     it "should raise flickr error 99: Insufficient permissions" do
       xml = File.read(File.dirname(__FILE__) + "/../fixtures/flickr/contacts/get_list-fail-99.xml")
-      @flickr.stub!(:request_over_http).and_return(xml)
+      @flickr.stub(:request_over_http).and_return(xml)
       lambda { @flickr.contacts.get_list }.should raise_error(Flickr::Error, /^99:/)
     end
   end

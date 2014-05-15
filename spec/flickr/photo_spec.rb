@@ -29,7 +29,7 @@ describe Flickr::Photos::Photo do
 
   before :each do
     @flickr = SpecHelper.flickr
-    #@flickr.stub!(:request_over_http).and_return(info_xml)
+    #@flickr.stub(:request_over_http).and_return(info_xml)
     @photo = Flickr::Photos::Photo.new(@flickr, valid_photo_attributes)
   end
 
@@ -45,7 +45,7 @@ describe Flickr::Photos::Photo do
 
     before :each do
       sizes_xml = File.read(File.dirname(__FILE__) + "/../fixtures/flickr/photos/get_sizes-0.xml")
-      @flickr.stub!(:request_over_http).and_return(sizes_xml)
+      @flickr.stub(:request_over_http).and_return(sizes_xml)
     end
 
     it "should return the appropriate Flickr::Photos::Size instance when requested by symbol" do
@@ -142,7 +142,7 @@ describe Flickr::Photos::Photo do
 
     before :each do
       @flickr = SpecHelper.flickr
-      #@flickr.stub!(:request_over_http).and_return(info_xml)
+      #@flickr.stub(:request_over_http).and_return(info_xml)
       @photo = Flickr::Photos::Photo.new(@flickr, valid_photo_attributes)
     end
 

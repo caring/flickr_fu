@@ -22,7 +22,7 @@ describe Flickr::Photosets do
     end
 
     it "should return an array of photoset objects" do
-      @flickr.stub!(:request_over_http).and_return(@get_list_xml)
+      @flickr.stub(:request_over_http).and_return(@get_list_xml)
       photosets = @flickr.photosets.get_list
 
       photosets[0].should be_an_instance_of(Flickr::Photosets::Photoset)
@@ -35,7 +35,7 @@ describe Flickr::Photosets do
     it "should call flick.photosets.create" do
       @flickr.should_receive(:send_request).with("flickr.photosets.create",
                                                  { :title => "new photoset", :primary_photo_id => 42 })
-      @flickr.stub!(:request_over_http).and_return(@create_xml)
+      @flickr.stub(:request_over_http).and_return(@create_xml)
       subject.create("new photoset", 42)
     end
   end
@@ -51,7 +51,7 @@ describe Flickr::Photosets do
     end
 
     it "should return an array of photo objects" do
-      @flickr.stub!(:request_over_http).and_return(@get_photos_xml)
+      @flickr.stub(:request_over_http).and_return(@get_photos_xml)
       photos = @photoset.get_photos
 
       photos.should_not be_nil
@@ -65,7 +65,7 @@ describe Flickr::Photosets do
      it "should call flickr.photosets.addPhoto" do
        @flickr.should_receive(:send_request).with("flickr.photosets.addPhoto",
                                                  { :photo_id => 43, :photoset_id => 4 })
-       @flickr.stub!(:request_over_http).and_return("")
+       @flickr.stub(:request_over_http).and_return("")
        subject.add_photo(43)
      end
   end
